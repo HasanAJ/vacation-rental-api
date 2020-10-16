@@ -23,15 +23,11 @@ namespace VacationRental.IntegrationTests.Calendar
         public async Task GivenCompleteRequest_WhenGetCalendar_ThenAGetReturnsTheCalculatedCalendar()
         {
             DateTime dtStart = DateTime.UtcNow.Date;
-            DateTime dt1 = DateTime.UtcNow.AddDays(1).Date;
-            DateTime dt2 = DateTime.UtcNow.AddDays(2).Date;
-            DateTime dt3 = DateTime.UtcNow.AddDays(3).Date;
-            DateTime dt4 = DateTime.UtcNow.AddDays(4).Date;
 
             RentalBindingDto postRentalRequest = new RentalBindingDto
             {
                 Units = 2,
-                PreparationTimeInDays = 0
+                PreparationTimeInDays = 1
             };
 
             ResourceIdDto postRentalResult;
@@ -45,7 +41,7 @@ namespace VacationRental.IntegrationTests.Calendar
             {
                 RentalId = postRentalResult.Id,
                 Nights = 2,
-                Start = dt1
+                Start = DateTime.UtcNow.AddDays(1).Date
             };
 
             ResourceIdDto postBooking1Result;
@@ -59,7 +55,7 @@ namespace VacationRental.IntegrationTests.Calendar
             {
                 RentalId = postRentalResult.Id,
                 Nights = 2,
-                Start = dt2
+                Start = DateTime.UtcNow.AddDays(2).Date
             };
 
             ResourceIdDto postBooking2Result;
@@ -80,22 +76,27 @@ namespace VacationRental.IntegrationTests.Calendar
 
                 Assert.Equal(dtStart, getCalendarResult.Dates[0].Date);
                 Assert.Empty(getCalendarResult.Dates[0].Bookings);
+                Assert.Empty(getCalendarResult.Dates[0].PreparationTimes);
 
-                Assert.Equal(dt1, getCalendarResult.Dates[1].Date);
+                Assert.Equal(dtStart.AddDays(1), getCalendarResult.Dates[1].Date);
                 Assert.Single(getCalendarResult.Dates[1].Bookings);
                 Assert.Contains(getCalendarResult.Dates[1].Bookings, x => x.Id == postBooking1Result.Id);
+                Assert.Empty(getCalendarResult.Dates[1].PreparationTimes);
 
-                Assert.Equal(dt2, getCalendarResult.Dates[2].Date);
+                Assert.Equal(dtStart.AddDays(2), getCalendarResult.Dates[2].Date);
                 Assert.Equal(2, getCalendarResult.Dates[2].Bookings.Count);
                 Assert.Contains(getCalendarResult.Dates[2].Bookings, x => x.Id == postBooking1Result.Id);
                 Assert.Contains(getCalendarResult.Dates[2].Bookings, x => x.Id == postBooking2Result.Id);
+                Assert.Empty(getCalendarResult.Dates[2].PreparationTimes);
 
-                Assert.Equal(dt3, getCalendarResult.Dates[3].Date);
+                Assert.Equal(dtStart.AddDays(3), getCalendarResult.Dates[3].Date);
                 Assert.Single(getCalendarResult.Dates[3].Bookings);
                 Assert.Contains(getCalendarResult.Dates[3].Bookings, x => x.Id == postBooking2Result.Id);
+                Assert.Contains(getCalendarResult.Dates[3].PreparationTimes, x => x.Unit == 1);
 
-                Assert.Equal(dt4, getCalendarResult.Dates[4].Date);
+                Assert.Equal(dtStart.AddDays(4), getCalendarResult.Dates[4].Date);
                 Assert.Empty(getCalendarResult.Dates[4].Bookings);
+                Assert.Contains(getCalendarResult.Dates[4].PreparationTimes, x => x.Unit == 2);
             }
         }
     }
