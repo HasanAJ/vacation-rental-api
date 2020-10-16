@@ -47,32 +47,42 @@ namespace VacationRental.Core.Services
                     PreparationTimes = new List<PreparationTimeDto>()
                 };
 
-                List<Booking> currentBookings = bookings
-                    .Where(i => i.Start <= calendarDate.Date && i.End > calendarDate.Date)
-                    .ToList();
+                SetupBookings(calendarDate, bookings);
 
-                foreach (Booking booking in currentBookings)
-                {
-                    calendarDate.Bookings.Add(new CalendarBookingDto
-                    {
-                        Id = booking.Id,
-                        Unit = booking.UnitId
-                    });
-                }
-
-                List<Booking> preparingUnits = bookings
-                    .Where(i => i.End <= calendarDate.Date && i.End.AddDays(rental.PreparationTimeInDays) > calendarDate.Date)
-                    .ToList();
-
-                foreach (Booking booking in preparingUnits)
-                {
-                    calendarDate.PreparationTimes.Add(new PreparationTimeDto() { Unit = booking.UnitId });
-                }
+                SetupPreparationTimes(calendarDate, bookings, rental);
 
                 calendar.Dates.Add(calendarDate);
             }
 
             return calendar;
+        }
+
+        private void SetupBookings(CalendarDateDto calendarDate, List<Booking> bookings)
+        {
+            List<Booking> currentBookings = bookings
+                                .Where(i => i.Start <= calendarDate.Date && i.End > calendarDate.Date)
+                                .ToList();
+
+            foreach (Booking booking in currentBookings)
+            {
+                calendarDate.Bookings.Add(new CalendarBookingDto
+                {
+                    Id = booking.Id,
+                    Unit = booking.UnitId
+                });
+            }
+        }
+
+        private void SetupPreparationTimes(CalendarDateDto calendarDate, List<Booking> bookings, Rental rental)
+        {
+            List<Booking> preparingUnits = bookings
+                    .Where(i => i.End <= calendarDate.Date && i.End.AddDays(rental.PreparationTimeInDays) > calendarDate.Date)
+                    .ToList();
+
+            foreach (Booking booking in preparingUnits)
+            {
+                calendarDate.PreparationTimes.Add(new PreparationTimeDto() { Unit = booking.UnitId });
+            }
         }
     }
 }
