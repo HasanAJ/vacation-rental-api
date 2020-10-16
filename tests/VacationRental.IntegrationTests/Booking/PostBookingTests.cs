@@ -39,7 +39,7 @@ namespace VacationRental.IntegrationTests.Booking
             {
                 RentalId = postRentalResult.Id,
                 Nights = 3,
-                Start = new DateTime(2001, 01, 01)
+                Start = DateTime.UtcNow.AddDays(2)
             };
 
             ResourceIdDto postBookingResult;
@@ -81,7 +81,7 @@ namespace VacationRental.IntegrationTests.Booking
             {
                 RentalId = postRentalResult.Id,
                 Nights = 3,
-                Start = new DateTime(2002, 01, 01)
+                Start = DateTime.UtcNow.AddDays(1)
             };
 
             using (HttpResponseMessage postBooking1Response = await _client.PostAsJsonAsync($"/api/v1/bookings", postBooking1Request))
@@ -93,7 +93,7 @@ namespace VacationRental.IntegrationTests.Booking
             {
                 RentalId = postRentalResult.Id,
                 Nights = 1,
-                Start = new DateTime(2002, 01, 02)
+                Start = DateTime.UtcNow.AddDays(2)
             };
 
             using (HttpResponseMessage postBooking1Response = await _client.PostAsJsonAsync($"/api/v1/bookings", postBooking2Request))

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using VacationRental.Core.Attributes;
 
 namespace VacationRental.Core.Models.Dtos.Booking
 {
@@ -10,6 +11,7 @@ namespace VacationRental.Core.Models.Dtos.Booking
         [Range(1, int.MaxValue)]
         public int RentalId { get; set; }
 
+        [FutureDate]
         public DateTime Start
         {
             get => _startIgnoreTime;

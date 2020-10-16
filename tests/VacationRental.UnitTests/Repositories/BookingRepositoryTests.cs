@@ -65,8 +65,8 @@ namespace VacationRental.UnitTests.Repositories
             List<Booking> actual = await _bookingRepository.Get(rentalId, startDate, nights, preparationTime, new CancellationToken());
 
             List<Booking> expected = bookings
-                .Where(i => (i.RentalId == rentalId
-                            && (i.Start <= startDate.Date && i.End.AddDays(preparationTime) > startDate.Date)
+                .Where(i => (i.RentalId == rentalId)
+                            && ((i.Start <= startDate.Date && i.End.AddDays(preparationTime) > startDate.Date)
                             || (i.Start < startDate.AddDays(nights).AddDays(preparationTime) && i.End.AddDays(preparationTime) >= startDate.AddDays(nights).AddDays(preparationTime))
                             || (i.Start > startDate && i.End.AddDays(preparationTime) < startDate.AddDays(nights).AddDays(preparationTime))))
                .ToList();
