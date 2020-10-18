@@ -13,13 +13,17 @@ namespace AuthService.Core.UnitTests.Attributes
             _futureDateAttribute = new FutureDateAttribute();
         }
 
-        [Theory]
-        [InlineData("2019-01-01", false)]
-        [InlineData("2020-09-30", false)]
-        [InlineData("2025-12-30", true)]
-        public void IsValid(string date, bool isValid)
+        [Fact]
+        public void IsValid()
         {
-            Assert.Equal(isValid, _futureDateAttribute.IsValid(DateTime.Parse(date).Date));
+            Assert.True(_futureDateAttribute.IsValid(DateTime.UtcNow.Date));
+            Assert.True(_futureDateAttribute.IsValid(DateTime.UtcNow.AddSeconds(5).Date));
+            Assert.True(_futureDateAttribute.IsValid(DateTime.UtcNow.AddMinutes(5).Date));
+            Assert.True(_futureDateAttribute.IsValid(DateTime.UtcNow.AddYears(5).Date));
+            Assert.True(_futureDateAttribute.IsValid(DateTime.UtcNow.AddMinutes(-1).Date));
+
+            Assert.False(_futureDateAttribute.IsValid(DateTime.UtcNow.AddDays(-1).Date));
+            Assert.False(_futureDateAttribute.IsValid(DateTime.UtcNow.AddYears(-5).Date));
         }
     }
 }
