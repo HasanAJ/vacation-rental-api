@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 using VacationRental.Core.Common.Constants;
 using VacationRental.Core.Exceptions;
-using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Interfaces.Validators;
 using VacationRental.Core.Models.Domain;
 using VacationRental.Core.Models.Dtos.Rental;

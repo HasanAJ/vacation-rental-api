@@ -85,7 +85,7 @@ namespace VacationRental.UnitTests.Repositories
         }
 
         [Fact]
-        public async Task Get_Success()
+        public async Task Get_Success_RentalWithPreparationTime()
         {
             DateTime startDate = new DateTime(2020, 1, 2);
             int preparationTime = 2;
@@ -109,7 +109,7 @@ namespace VacationRental.UnitTests.Repositories
         }
 
         [Fact]
-        public async Task Get_Success_2()
+        public async Task Get_Success_Rental()
         {
             DateTime startDate = new DateTime(2020, 1, 2);
 
@@ -129,7 +129,7 @@ namespace VacationRental.UnitTests.Repositories
         }
 
         [Fact]
-        public async Task Get_Success_3()
+        public async Task Get_Success_BookingId()
         {
             Booking actual = await _bookingRepository.Get(bookings[0].Id, new CancellationToken());
 

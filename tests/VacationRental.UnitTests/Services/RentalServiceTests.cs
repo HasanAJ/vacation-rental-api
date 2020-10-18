@@ -10,7 +10,6 @@ using VacationRental.Core.Interfaces.Adapters;
 using VacationRental.Core.Interfaces.Managers;
 using VacationRental.Core.Interfaces.Services;
 using VacationRental.Core.Interfaces.UnitOfWork;
-using VacationRental.Core.Interfaces.Validators;
 using VacationRental.Core.Models.Domain;
 using VacationRental.Core.Models.Dtos.Rental;
 using VacationRental.Core.Models.Dtos.Shared;

@@ -28,7 +28,7 @@ namespace VacationRental.Infrastructure.Repositories
 
         public async Task<List<Booking>> Get(int rentalId, DateTime startDate, int nights, int preparationTime, CancellationToken ct)
         {
-            var allbookings = await _db.Set<Booking>().ToListAsync(ct);
+            List<Booking> allbookings = await _db.Set<Booking>().ToListAsync(ct);
 
             return await _db.Set<Booking>()
                 .Where(i => (i.Unit.RentalId == rentalId && i.Unit.IsActive == true)

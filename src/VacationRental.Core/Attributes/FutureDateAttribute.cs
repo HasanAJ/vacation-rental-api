@@ -11,7 +11,7 @@ namespace VacationRental.Core.Attributes
 
         public override bool IsValid(object value)
         {
-            var dateValue = (DateTime)value;
+            DateTime dateValue = (DateTime)value;
 
             if (dateValue.Date >= DateTime.UtcNow.Date)
             {

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using VacationRental.Core.Common.Constants;
-using VacationRental.Core.Exceptions;
 using VacationRental.Core.Interfaces.Managers;
 using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Interfaces.Validators;
@@ -44,14 +42,14 @@ namespace VacationRental.Core.Managers
 
                 unitId = freeUnitIds
                     .OrderBy(i => i)
-                    .FirstOrDefault();
+                    .First();
             }
             else
             {
                 unitId = allUnits
                     .Select(i => i.Id)
                     .OrderBy(i => i)
-                    .FirstOrDefault();
+                    .First();
             }
 
             return unitId;
@@ -108,13 +106,16 @@ namespace VacationRental.Core.Managers
                     .Where(i => !occupiedUnits.Contains(i))
                     .ToList();
 
-            int unitsToDisable = rental.AllUnits.Count - newUnits;
-
-            if (unitsToDisable > 0)
+            if (freeUnits != null)
             {
-                for (int i = 0; i < unitsToDisable; i++)
+                int unitsToDisable = rental.AllUnits.Count - newUnits;
+
+                if (unitsToDisable > 0)
                 {
-                    freeUnits[i].IsActive = false;
+                    for (int i = 0; i < unitsToDisable; i++)
+                    {
+                        freeUnits[i].IsActive = false;
+                    }
                 }
             }
         }
