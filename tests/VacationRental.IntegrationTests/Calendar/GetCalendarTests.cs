@@ -92,11 +92,11 @@ namespace VacationRental.IntegrationTests.Calendar
                 Assert.Equal(dtStart.AddDays(3), getCalendarResult.Dates[3].Date);
                 Assert.Single(getCalendarResult.Dates[3].Bookings);
                 Assert.Contains(getCalendarResult.Dates[3].Bookings, x => x.Id == postBooking2Result.Id);
-                Assert.Contains(getCalendarResult.Dates[3].PreparationTimes, x => x.Unit == 1);
+                Assert.Contains(getCalendarResult.Dates[3].PreparationTimes, x => x.Unit == 6);
 
                 Assert.Equal(dtStart.AddDays(4), getCalendarResult.Dates[4].Date);
                 Assert.Empty(getCalendarResult.Dates[4].Bookings);
-                Assert.Contains(getCalendarResult.Dates[4].PreparationTimes, x => x.Unit == 2);
+                Assert.Contains(getCalendarResult.Dates[4].PreparationTimes, x => x.Unit == 7);
             }
         }
     }

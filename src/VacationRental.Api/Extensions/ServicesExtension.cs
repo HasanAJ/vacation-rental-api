@@ -34,6 +34,7 @@ namespace VacationRental.Api.Extensions
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IRentalRepository, RentalRepository>();
+            services.AddScoped<IUnitRepository, UnitRepository>();
         }
 
         public static void RegisterCore(this IServiceCollection services)
@@ -43,7 +44,7 @@ namespace VacationRental.Api.Extensions
             services.AddSingleton<IMappingAdapter, MappingAdapter>();
 
             services.AddScoped<IBookingValidator, BookingValidator>();
-            services.AddScoped<IRentalValidator, RentalValidator>();
+            services.AddScoped<IUnitValidator, UnitValidator>();
 
             services.AddScoped<IUnitManager, UnitManager>();
 

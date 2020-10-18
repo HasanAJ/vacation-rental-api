@@ -9,6 +9,7 @@ namespace VacationRental.Core.Interfaces.UnitOfWork
         IRentalRepository RentalRepository { get; }
 
         IBookingRepository BookingRepository { get; }
+        IUnitRepository UnitRepository { get; }
 
         Task<int> Commit(CancellationToken ct);
 

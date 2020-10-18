@@ -12,6 +12,7 @@ namespace VacationRental.Infrastructure.UnitOfWork
         private readonly ApplicationDbContext _db;
         private IRentalRepository _rentalRepository;
         private IBookingRepository _bookingRepository;
+        private IUnitRepository _unitRepository;
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -21,6 +22,8 @@ namespace VacationRental.Infrastructure.UnitOfWork
         public IRentalRepository RentalRepository => _rentalRepository = _rentalRepository ?? new RentalRepository(_db);
 
         public IBookingRepository BookingRepository => _bookingRepository = _bookingRepository ?? new BookingRepository(_db);
+
+        public IUnitRepository UnitRepository => _unitRepository = _unitRepository ?? new UnitRepository(_db);
 
         public async Task<int> Commit(CancellationToken ct)
         {

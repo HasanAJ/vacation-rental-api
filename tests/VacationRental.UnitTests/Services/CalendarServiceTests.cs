@@ -24,7 +24,7 @@ namespace VacationRental.UnitTests.Services
         private readonly Rental rental = new Rental()
         {
             Id = 1,
-            Units = 2,
+            AllUnits = new List<Unit>() { new Unit() { Id = 1, RentalId = 1, IsActive = true } },
             PreparationTimeInDays = 1
         };
 
@@ -33,7 +33,6 @@ namespace VacationRental.UnitTests.Services
             new Booking()
             {
                 Id = 1,
-                RentalId = 1,
                 UnitId = 1,
                 Start = new DateTime(2020, 1, 1),
                 Nights = 2
@@ -41,7 +40,6 @@ namespace VacationRental.UnitTests.Services
             new Booking()
             {
                 Id = 2,
-                RentalId = 1,
                 UnitId = 2,
                 Start = new DateTime(2020, 1, 2),
                 Nights = 2
@@ -49,7 +47,6 @@ namespace VacationRental.UnitTests.Services
             new Booking()
             {
                 Id = 3,
-                RentalId = 1,
                 UnitId = 1,
                 Start = new DateTime(2020, 1, 5),
                 Nights = 1
@@ -66,7 +63,7 @@ namespace VacationRental.UnitTests.Services
         [Fact]
         public async Task Get_Success()
         {
-            _uow.Setup(x => x.RentalRepository.Find(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(rental));
+            _uow.Setup(x => x.RentalRepository.Get(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(rental));
             _uow.Setup(x => x.BookingRepository.Get(It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(bookings));
 
             CalendarDto expected = new CalendarDto()
@@ -168,7 +165,7 @@ namespace VacationRental.UnitTests.Services
         [Fact]
         public async Task Get_Fail_NotFound()
         {
-            _uow.Setup(x => x.RentalRepository.Find(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult((Rental)null));
+            _uow.Setup(x => x.RentalRepository.Get(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult((Rental)null));
 
             CustomException exception = await Assert.ThrowsAsync<CustomException>(() => _calendarService.Get(1, new DateTime(2020, 1, 1), 4, new CancellationToken()));
 

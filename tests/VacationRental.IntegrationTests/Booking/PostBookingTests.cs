@@ -55,7 +55,6 @@ namespace VacationRental.IntegrationTests.Booking
 
                 BookingDto getBookingResult = await getBookingResponse.Content.ReadAsAsync<BookingDto>();
                 Assert.Equal(postBookingRequest.RentalId, getBookingResult.RentalId);
-                Assert.Equal(1, getBookingResult.UnitId);
                 Assert.Equal(postBookingRequest.Nights, getBookingResult.Nights);
                 Assert.Equal(postBookingRequest.Start, getBookingResult.Start);
             }

@@ -1,12 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using VacationRental.Core.Models.Domain.Shared;
 
 namespace VacationRental.Core.Models.Domain
 {
     public class Rental : BaseEntity
     {
-        public int Units { get; set; }
+        public Rental()
+        {
+            AllUnits = new List<Unit>();
+        }
+
         public int PreparationTimeInDays { get; set; }
-        public virtual IEnumerable<Booking> Bookings { get; set; }
+        public virtual ICollection<Unit> AllUnits { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace VacationRental.Core.Services
 
         public async Task<BookingDto> Get(int bookingId, CancellationToken ct)
         {
-            Booking booking = await _uow.BookingRepository.Find(bookingId, ct);
+            Booking booking = await _uow.BookingRepository.Get(bookingId, ct);
 
             if (booking == null)
             {
@@ -49,7 +49,7 @@ namespace VacationRental.Core.Services
 
         public async Task<ResourceIdDto> Create(BookingBindingDto model, CancellationToken ct)
         {
-            Rental rental = await _uow.RentalRepository.Find(model.RentalId, ct);
+            Rental rental = await _uow.RentalRepository.Get(model.RentalId, ct);
 
             if (rental == null)
             {
@@ -62,7 +62,7 @@ namespace VacationRental.Core.Services
 
             Booking booking = _mapper.Map<Booking>(model);
 
-            booking.UnitId = _unitManager.GetUnitId(rental, occupiedUnits);
+            booking.UnitId = await _unitManager.GetFreeUnitId(rental.Id, occupiedUnits, ct);
 
             await _uow.BookingRepository.Add(booking, ct);
 

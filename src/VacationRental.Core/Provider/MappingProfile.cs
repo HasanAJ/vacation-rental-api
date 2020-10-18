@@ -9,10 +9,16 @@ namespace VacationRental.Core.Provider
     {
         public MappingProfile()
         {
-            CreateMap<Booking, BookingDto>();
+            CreateMap<Booking, BookingDto>().ForMember(
+                dest => dest.RentalId,
+                opt => opt.MapFrom(src => src.Unit.RentalId)
+            );
             CreateMap<BookingBindingDto, Booking>();
 
-            CreateMap<Rental, RentalDto>();
+            CreateMap<Rental, RentalDto>().ForMember(
+                dest => dest.Units,
+                opt => opt.MapFrom(src => src.AllUnits.Count)
+            );
             CreateMap<RentalBindingDto, Rental>();
         }
     }

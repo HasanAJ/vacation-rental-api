@@ -33,10 +33,15 @@ namespace VacationRental.UnitTests.Services
         private readonly Booking booking = new Booking()
         {
             Id = 1,
-            RentalId = 1,
             UnitId = 1,
             Start = new DateTime(2020, 1, 1),
-            Nights = 2
+            Nights = 2,
+            Unit = new Unit()
+            {
+                Id = 1,
+                RentalId = 1,
+                IsActive = true
+            }
         };
 
         public BookingServiceTests()
@@ -60,13 +65,12 @@ namespace VacationRental.UnitTests.Services
         [Fact]
         public async Task Get_Success()
         {
-            _uow.Setup(x => x.BookingRepository.Find(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(booking));
+            _uow.Setup(x => x.BookingRepository.Get(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(booking));
 
             BookingDto expected = new BookingDto()
             {
                 Id = 1,
                 RentalId = 1,
-                UnitId = 1,
                 Start = new DateTime(2020, 1, 1),
                 Nights = 2
             };
@@ -75,7 +79,6 @@ namespace VacationRental.UnitTests.Services
 
             Assert.Equal(expected.Id, actual.Id);
             Assert.Equal(expected.RentalId, actual.RentalId);
-            Assert.Equal(expected.UnitId, actual.UnitId);
             Assert.Equal(expected.Start, actual.Start);
             Assert.Equal(expected.Nights, actual.Nights);
         }
@@ -96,13 +99,13 @@ namespace VacationRental.UnitTests.Services
             Rental rental = new Rental()
             {
                 Id = 1,
-                Units = 1,
+                AllUnits = new List<Unit>() { new Unit() { Id = 1, RentalId = 1, IsActive = true } },
                 PreparationTimeInDays = 1
             };
 
-            _uow.Setup(x => x.RentalRepository.Find(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(rental));
+            _uow.Setup(x => x.RentalRepository.Get(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(rental));
             _bookingValidator.Setup(x => x.Validate(It.IsAny<Rental>(), It.IsAny<List<Booking>>()));
-            _unitManager.Setup(x => x.GetUnitId(It.IsAny<Rental>(), It.IsAny<List<Booking>>())).Returns(1);
+            _unitManager.Setup(x => x.GetFreeUnitId(It.IsAny<int>(), It.IsAny<List<Booking>>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(1));
             _uow.Setup(x => x.BookingRepository.Add(It.IsAny<Booking>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
             _uow.Setup(x => x.Commit(It.IsAny<CancellationToken>())).Returns(Task.FromResult(It.IsAny<int>()));
 
@@ -125,11 +128,11 @@ namespace VacationRental.UnitTests.Services
             Rental rental = new Rental()
             {
                 Id = 1,
-                Units = 1,
+                AllUnits = new List<Unit>() { new Unit() { Id = 1, RentalId = 1, IsActive = true } },
                 PreparationTimeInDays = 1
             };
 
-            _uow.Setup(x => x.RentalRepository.Find(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult((Rental)null));
+            _uow.Setup(x => x.RentalRepository.Get(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult((Rental)null));
 
             BookingBindingDto bookingBindingDto = new BookingBindingDto()
             {

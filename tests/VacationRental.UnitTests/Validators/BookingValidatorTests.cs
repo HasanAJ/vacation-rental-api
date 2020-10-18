@@ -17,7 +17,7 @@ namespace VacationRental.UnitTests.Validators
         private readonly Rental rental = new Rental()
         {
             Id = 1,
-            Units = 1,
+            AllUnits = new List<Unit>() { new Unit() { Id = 1, RentalId = 1, IsActive = true } },
             PreparationTimeInDays = 1
         };
 
@@ -47,21 +47,21 @@ namespace VacationRental.UnitTests.Validators
                 new Booking()
                 {
                     Id = 1,
-                    RentalId = 1,
+                    UnitId = 1,
                     Start = new DateTime(2020, 1, 1),
                     Nights = 2
                 },
                 new Booking()
                 {
                     Id = 2,
-                    RentalId = 1,
+                    UnitId = 1,
                     Start = new DateTime(2020, 1, 2),
                     Nights = 2
                 },
                 new Booking()
                 {
                     Id = 3,
-                    RentalId = 1,
+                    UnitId = 1,
                     Start = new DateTime(2020, 1, 3),
                     Nights = 2
                 }

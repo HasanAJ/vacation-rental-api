@@ -1,12 +1,13 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using VacationRental.Core.Interfaces.Repositories.Shared;
 using VacationRental.Core.Models.Domain;
 
 namespace VacationRental.Core.Interfaces.Repositories
 {
-    public interface IRentalRepository : IRepository<Rental>
+    public interface IUnitRepository : IRepository<Unit>
     {
-        Task<Rental> Get(int rentalId, CancellationToken ct);
+        Task<List<Unit>> Get(int rentalId, CancellationToken ct);
     }
 }

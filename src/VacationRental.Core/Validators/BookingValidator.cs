@@ -14,7 +14,7 @@ namespace VacationRental.Core.Validators
 
         public void Validate(Rental rental, List<Booking> currentBookings)
         {
-            if (currentBookings.Count >= rental.Units)
+            if (currentBookings.Count >= rental.AllUnits.Count)
             {
                 throw new CustomException(ApiCodeConstants.NOT_AVAILABLE, ApiErrorMessageConstants.BOOKING_NOT_AVAILABLE);
             }

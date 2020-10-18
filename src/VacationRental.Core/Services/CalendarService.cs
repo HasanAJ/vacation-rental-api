@@ -23,7 +23,7 @@ namespace VacationRental.Core.Services
 
         public async Task<CalendarDto> Get(int rentalId, DateTime start, int nights, CancellationToken ct)
         {
-            Rental rental = await _uow.RentalRepository.Find(rentalId, ct);
+            Rental rental = await _uow.RentalRepository.Get(rentalId, ct);
 
             if (rental == null)
             {

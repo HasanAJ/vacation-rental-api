@@ -18,22 +18,35 @@ namespace VacationRental.Infrastructure.Repositories
         {
         }
 
-        public async Task<List<Booking>> Get(int rentalId, DateTime startDate, int nights, int preparationTime, CancellationToken ct)
+        public async Task<Booking> Get(int bookingId, CancellationToken ct)
         {
             return await _db.Set<Booking>()
-                .Where(i => (i.RentalId == rentalId)
+                .Where(i => i.Id == bookingId)
+                .Include(i => i.Unit)
+                .SingleOrDefaultAsync(ct);
+        }
+
+        public async Task<List<Booking>> Get(int rentalId, DateTime startDate, int nights, int preparationTime, CancellationToken ct)
+        {
+            var allbookings = await _db.Set<Booking>().ToListAsync(ct);
+
+            return await _db.Set<Booking>()
+                .Where(i => (i.Unit.RentalId == rentalId && i.Unit.IsActive == true)
                         && ((i.Start <= startDate.Date && i.Start.AddDays(i.Nights).AddDays(preparationTime) > startDate.Date)
                         || (i.Start < startDate.AddDays(nights).AddDays(preparationTime) && i.Start.AddDays(i.Nights).AddDays(preparationTime) >= startDate.AddDays(nights).AddDays(preparationTime))
                         || (i.Start > startDate && i.Start.AddDays(i.Nights).AddDays(preparationTime) < startDate.AddDays(nights).AddDays(preparationTime))))
-               .ToListAsync(ct);
+                .Include(i => i.Unit)
+                .ToListAsync(ct);
         }
 
         public async Task<List<Booking>> Get(int rentalId, DateTime startDate, CancellationToken ct)
         {
             return await _db.Set<Booking>()
-                .Where(i => (i.RentalId == rentalId
-                        && (i.Start.AddDays(i.Nights) >= startDate.Date)))
-               .ToListAsync(ct);
+                .Where(i => i.Unit.RentalId == rentalId
+                        && i.Unit.IsActive == true
+                        && (i.Start.AddDays(i.Nights) >= startDate.Date))
+                .Include(i => i.Unit)
+                .ToListAsync(ct);
         }
     }
 }
