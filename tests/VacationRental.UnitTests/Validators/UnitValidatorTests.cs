@@ -20,13 +20,6 @@ namespace VacationRental.UnitTests.Validators
 
         private readonly IUnitValidator _unitValidator;
 
-        private readonly Rental rental = new Rental()
-        {
-            Id = 1,
-            AllUnits = new List<Unit>() { new Unit() { Id = 1, RentalId = 1, IsActive = true }, new Unit() { Id = 2, RentalId = 1, IsActive = true } },
-            PreparationTimeInDays = 1
-        };
-
         private readonly List<Booking> bookings = new List<Booking>()
         {
             new Booking()
@@ -63,7 +56,7 @@ namespace VacationRental.UnitTests.Validators
         [InlineData(3, 1)]
         [InlineData(4, 0)]
         [InlineData(5, 1)]
-        public void Validate_Success(int units, int preparationTime)
+        public void Validate_Success_WithBookings(int units, int preparationTime)
         {
             RentalBindingDto rentalBindingDto = new RentalBindingDto()
             {
@@ -72,6 +65,21 @@ namespace VacationRental.UnitTests.Validators
             };
 
             _unitValidator.Validate(rentalBindingDto, bookings, DateTime.UtcNow.Date);
+        }
+
+        [Theory]
+        [InlineData(1, 1)]
+        [InlineData(4, 5)]
+        [InlineData(50, 10)]
+        public void Validate_Success_NoBookings(int units, int preparationTime)
+        {
+            RentalBindingDto rentalBindingDto = new RentalBindingDto()
+            {
+                Units = units,
+                PreparationTimeInDays = preparationTime
+            };
+
+            _unitValidator.Validate(rentalBindingDto, null, DateTime.UtcNow.Date);
         }
 
         [Theory]

@@ -61,7 +61,7 @@ namespace VacationRental.UnitTests.Services
                 PreparationTimeInDays = 1
             };
 
-            RentalDto actual = await _rentalService.Get(1, new CancellationToken());
+            RentalDto actual = await _rentalService.Get(rental.Id, new CancellationToken());
 
             Assert.Equal(expected.Id, actual.Id);
             Assert.Equal(expected.Units, actual.Units);
@@ -72,7 +72,7 @@ namespace VacationRental.UnitTests.Services
         {
             _uow.Setup(x => x.RentalRepository.Get(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult((Rental)null));
 
-            CustomException exception = await Assert.ThrowsAsync<CustomException>(() => _rentalService.Get(1, new CancellationToken()));
+            CustomException exception = await Assert.ThrowsAsync<CustomException>(() => _rentalService.Get(rental.Id, new CancellationToken()));
 
             Assert.Equal(ApiCodeConstants.NOT_FOUND, exception.Code);
         }
@@ -110,7 +110,7 @@ namespace VacationRental.UnitTests.Services
                 PreparationTimeInDays = 2
             };
 
-            await _rentalService.Update(1, rentalBindingDto, new CancellationToken());
+            await _rentalService.Update(rental.Id, rentalBindingDto, new CancellationToken());
 
             _uow.Verify(i => i.RentalRepository.Update(It.IsAny<Rental>()), Times.Once());
             _uow.Verify(i => i.Commit(It.IsAny<CancellationToken>()), Times.Once());

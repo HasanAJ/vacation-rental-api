@@ -63,6 +63,8 @@ namespace VacationRental.UnitTests.Services
         [Fact]
         public async Task Get_Success()
         {
+            DateTime startDate = new DateTime(2020, 1, 1);
+
             _uow.Setup(x => x.RentalRepository.Get(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(rental));
             _uow.Setup(x => x.BookingRepository.Get(It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult(bookings));
 
@@ -73,7 +75,7 @@ namespace VacationRental.UnitTests.Services
                 {
                     new CalendarDateDto()
                     {
-                        Date = new DateTime(2020, 1, 1),
+                        Date = startDate,
                         Bookings = new List<CalendarBookingDto>()
                         {
                             new CalendarBookingDto()
@@ -88,7 +90,7 @@ namespace VacationRental.UnitTests.Services
                     },
                     new CalendarDateDto()
                     {
-                        Date = new DateTime(2020, 1, 2),
+                        Date = startDate.AddDays(1),
                         Bookings = new List<CalendarBookingDto>()
                         {
                             new CalendarBookingDto()
@@ -108,7 +110,7 @@ namespace VacationRental.UnitTests.Services
                     },
                     new CalendarDateDto()
                     {
-                        Date = new DateTime(2020, 1, 3),
+                        Date = startDate.AddDays(2),
                         Bookings = new List<CalendarBookingDto>()
                         {
                             new CalendarBookingDto()
@@ -127,7 +129,7 @@ namespace VacationRental.UnitTests.Services
                     },
                     new CalendarDateDto()
                     {
-                        Date = new DateTime(2020, 1, 4),
+                        Date = startDate.AddDays(3),
                         Bookings = new List<CalendarBookingDto>()
                         {
                         },
@@ -141,7 +143,7 @@ namespace VacationRental.UnitTests.Services
                     },
                     new CalendarDateDto()
                     {
-                        Date = new DateTime(2020, 1, 5),
+                        Date = startDate.AddDays(4),
                         Bookings = new List<CalendarBookingDto>()
                         {
                             new CalendarBookingDto()
@@ -157,7 +159,7 @@ namespace VacationRental.UnitTests.Services
                 }
             };
 
-            CalendarDto actual = await _calendarService.Get(1, new DateTime(2020, 1, 1), 5, new CancellationToken());
+            CalendarDto actual = await _calendarService.Get(rental.Id, startDate, 5, new CancellationToken());
 
             actual.Should().BeEquivalentTo(expected);
         }
@@ -167,7 +169,7 @@ namespace VacationRental.UnitTests.Services
         {
             _uow.Setup(x => x.RentalRepository.Get(It.IsAny<int>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult((Rental)null));
 
-            CustomException exception = await Assert.ThrowsAsync<CustomException>(() => _calendarService.Get(1, new DateTime(2020, 1, 1), 4, new CancellationToken()));
+            CustomException exception = await Assert.ThrowsAsync<CustomException>(() => _calendarService.Get(rental.Id, new DateTime(2020, 1, 1), 4, new CancellationToken()));
 
             Assert.Equal(ApiCodeConstants.NOT_FOUND, exception.Code);
         }

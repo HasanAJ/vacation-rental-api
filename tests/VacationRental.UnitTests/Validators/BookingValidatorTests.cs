@@ -17,7 +17,10 @@ namespace VacationRental.UnitTests.Validators
         private readonly Rental rental = new Rental()
         {
             Id = 1,
-            AllUnits = new List<Unit>() { new Unit() { Id = 1, RentalId = 1, IsActive = true } },
+            AllUnits = new List<Unit>() {
+                new Unit() { Id = 1, RentalId = 1, IsActive = true },
+                new Unit() { Id = 2, RentalId = 1, IsActive = true }
+            },
             PreparationTimeInDays = 1
         };
 
@@ -34,9 +37,26 @@ namespace VacationRental.UnitTests.Validators
         }
 
         [Fact]
-        public void Validate_Success()
+        public void Validate_Success_NoBookings()
         {
             _bookingValidator.Validate(rental, new List<Booking>());
+        }
+
+        [Fact]
+        public void Validate_Success_WithBookings()
+        {
+            List<Booking> bookings = new List<Booking>()
+            {
+                new Booking()
+                {
+                    Id = 1,
+                    UnitId = 1,
+                    Start = new DateTime(2020, 1, 1),
+                    Nights = 2
+                }
+            };
+
+            _bookingValidator.Validate(rental, bookings);
         }
 
         [Fact]

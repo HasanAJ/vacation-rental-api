@@ -29,7 +29,7 @@ namespace VacationRental.Core.Managers
 
             List<Unit> allUnits = await _uow.UnitRepository.Get(rentalId, ct);
 
-            if (occupiedUnits.Any())
+            if (occupiedUnits != null && occupiedUnits.Any())
             {
                 List<int> occupiedUnitIds = occupiedUnits
                     .Select(i => i.UnitId)
@@ -69,12 +69,9 @@ namespace VacationRental.Core.Managers
 
                 List<Booking> bookings = await _uow.BookingRepository.Get(rental.Id, start, ct);
 
-                if (bookings != null)
-                {
-                    _unitValidator.Validate(model, bookings, start);
-                }
+                _unitValidator.Validate(model, bookings, start);
 
-                await HandleLessUnits(rental, bookings, model.Units, ct);
+                HandleLessUnits(rental.AllUnits.ToList(), bookings, model.Units);
             }
         }
 
@@ -92,11 +89,9 @@ namespace VacationRental.Core.Managers
             }
         }
 
-        private async Task HandleLessUnits(Rental rental, List<Booking> bookings, int newUnits, CancellationToken ct)
+        private void HandleLessUnits(List<Unit> allUnits, List<Booking> bookings, int newUnits)
         {
             List<Unit> freeUnits = new List<Unit>();
-
-            List<Unit> allUnits = await _uow.UnitRepository.Get(rental.Id, ct);
 
             List<Unit> occupiedUnits = bookings
                 .Select(i => i.Unit)
@@ -108,7 +103,7 @@ namespace VacationRental.Core.Managers
 
             if (freeUnits != null)
             {
-                int unitsToDisable = rental.AllUnits.Count - newUnits;
+                int unitsToDisable = allUnits.Count - newUnits;
 
                 if (unitsToDisable > 0)
                 {

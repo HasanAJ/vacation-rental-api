@@ -13,28 +13,31 @@ namespace VacationRental.Core.Validators
     {
         public void Validate(RentalBindingDto model, List<Booking> bookings, DateTime start)
         {
-            DateTime latestDateBooking = bookings
-                                                .OrderByDescending(i => i.End)
-                                                .Select(i => i.End)
-                                                .FirstOrDefault();
-
-            int nights = (latestDateBooking - start).Days;
-
-            for (int i = 0; i < nights; i++)
+            if (bookings != null && bookings.Any())
             {
-                DateTime calendarDate = start.Date.AddDays(i);
+                DateTime latestDateBooking = bookings
+                                              .OrderByDescending(i => i.End)
+                                              .Select(i => i.End)
+                                              .FirstOrDefault();
 
-                int currentBookings = bookings
-                    .Count(i => i.Start <= calendarDate
-                            && i.End > calendarDate);
+                int nights = (latestDateBooking - start).Days;
 
-                int preparingUnits = bookings
-                    .Count(i => i.End <= calendarDate
-                            && i.End.AddDays(model.PreparationTimeInDays) > calendarDate);
-
-                if (currentBookings + preparingUnits > model.Units)
+                for (int i = 0; i < nights; i++)
                 {
-                    throw new CustomException(ApiCodeConstants.INVALID_UPDATE, ApiErrorMessageConstants.INVALID_UPDATE);
+                    DateTime calendarDate = start.Date.AddDays(i);
+
+                    int currentBookings = bookings
+                        .Count(i => i.Start <= calendarDate
+                                && i.End > calendarDate);
+
+                    int preparingUnits = bookings
+                        .Count(i => i.End <= calendarDate
+                                && i.End.AddDays(model.PreparationTimeInDays) > calendarDate);
+
+                    if (currentBookings + preparingUnits > model.Units)
+                    {
+                        throw new CustomException(ApiCodeConstants.INVALID_UPDATE, ApiErrorMessageConstants.INVALID_UPDATE);
+                    }
                 }
             }
         }

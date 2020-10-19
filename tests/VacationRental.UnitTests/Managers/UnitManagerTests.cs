@@ -65,7 +65,7 @@ namespace VacationRental.UnitTests.Managers
         [Fact]
         public async Task GetUnitId_Success_NoBookings()
         {
-            int actual = await _unitManager.GetFreeUnitId(1, new List<Booking>(), new CancellationToken());
+            int actual = await _unitManager.GetFreeUnitId(rental.Id, new List<Booking>(), new CancellationToken());
 
             Assert.Equal(1, actual);
         }
@@ -98,7 +98,7 @@ namespace VacationRental.UnitTests.Managers
                 }
             };
 
-            int actual = await _unitManager.GetFreeUnitId(1, bookings, new CancellationToken());
+            int actual = await _unitManager.GetFreeUnitId(rental.Id, bookings, new CancellationToken());
 
             Assert.Equal(3, actual);
         }

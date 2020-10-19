@@ -1,5 +1,7 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
+using VacationRental.Core.Models.Dtos.Booking;
 using VacationRental.Core.Models.Dtos.Rental;
 using VacationRental.Core.Models.Dtos.Shared;
 using Xunit;
@@ -76,6 +78,50 @@ namespace VacationRental.IntegrationTests.Rental
                 RentalDto getResult = await getResponse.Content.ReadAsAsync<RentalDto>();
                 Assert.Equal(putRequest.Units, getResult.Units);
                 Assert.Equal(putRequest.PreparationTimeInDays, getResult.PreparationTimeInDays);
+            }
+        }
+
+        [Fact]
+        public async Task GivenCompleteRequest_WhenPostRental_ThenAFailedPut()
+        {
+            RentalBindingDto request = new RentalBindingDto
+            {
+                Units = 2,
+                PreparationTimeInDays = 1
+            };
+
+            ResourceIdDto postResult;
+            using (HttpResponseMessage postResponse = await _client.PostAsJsonAsync($"/api/v1/rentals", request))
+            {
+                Assert.True(postResponse.IsSuccessStatusCode);
+                postResult = await postResponse.Content.ReadAsAsync<ResourceIdDto>();
+            }
+
+            BookingBindingDto postBookingRequest = new BookingBindingDto
+            {
+                RentalId = postResult.Id,
+                Nights = 3,
+                Start = DateTime.UtcNow.AddDays(2)
+            };
+
+            using (HttpResponseMessage postBookingResponse = await _client.PostAsJsonAsync($"/api/v1/bookings", postBookingRequest))
+            {
+                Assert.True(postBookingResponse.IsSuccessStatusCode);
+            }
+            using (HttpResponseMessage postBookingResponse = await _client.PostAsJsonAsync($"/api/v1/bookings", postBookingRequest))
+            {
+                Assert.True(postBookingResponse.IsSuccessStatusCode);
+            }
+
+            RentalBindingDto putRequest = new RentalBindingDto
+            {
+                Units = 1,
+                PreparationTimeInDays = 2
+            };
+
+            using (HttpResponseMessage putResponse = await _client.PutAsJsonAsync($"/api/v1/rentals/{postResult.Id}", putRequest))
+            {
+                Assert.False(putResponse.IsSuccessStatusCode);
             }
         }
     }

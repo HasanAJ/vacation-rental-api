@@ -116,7 +116,7 @@ namespace VacationRental.UnitTests.Services
                 Nights = 2
             };
 
-            ResourceIdDto actual = await _bookingService.Create(bookingBindingDto, new CancellationToken());
+            await _bookingService.Create(bookingBindingDto, new CancellationToken());
 
             _uow.Verify(i => i.BookingRepository.Add(It.IsAny<Booking>(), It.IsAny<CancellationToken>()), Times.Once());
             _uow.Verify(i => i.Commit(It.IsAny<CancellationToken>()), Times.Once());
