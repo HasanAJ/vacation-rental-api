@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using VacationRental.Api.Extensions;
+using VacationRental.Core.Provider;
 
 namespace VacationRental.Api
 {
@@ -27,7 +27,7 @@ namespace VacationRental.Api
             services.RegisterCore();
             services.RegisterInfrastructure();
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(MappingProfile));
 
             services.ConfigureControllers();
         }
