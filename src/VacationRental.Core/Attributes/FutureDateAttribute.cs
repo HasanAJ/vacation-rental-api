@@ -9,16 +9,16 @@ namespace VacationRental.Core.Attributes
         {
         }
 
-        public override bool IsValid(object value)
+        protected override ValidationResult IsValid(object value, ValidationContext context)
         {
             DateTime dateValue = (DateTime)value;
 
             if (dateValue.Date >= DateTime.UtcNow.Date)
             {
-                return true;
+                return ValidationResult.Success;
             }
 
-            return false;
+            return new ValidationResult(ErrorMessage);
         }
     }
 }

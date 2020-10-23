@@ -141,7 +141,7 @@ namespace VacationRental.UnitTests.Services
                 Nights = 2
             };
 
-            CustomException exception = await Assert.ThrowsAsync<CustomException>(async () => await _bookingService.Create(bookingBindingDto, new CancellationToken()));
+            CustomException exception = await Assert.ThrowsAsync<CustomException>(() => _bookingService.Create(bookingBindingDto, new CancellationToken()));
 
             Assert.Equal(ApiCodeConstants.NOT_FOUND, exception.Code);
         }
