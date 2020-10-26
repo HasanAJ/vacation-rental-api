@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using VacationRental.Core.Common.Constants;
 using VacationRental.Core.Interfaces.Adapters;
+using VacationRental.Core.Models.Dtos.Booking;
 
 namespace VacationRental.Core.Adapters
 {
@@ -20,6 +22,14 @@ namespace VacationRental.Core.Adapters
         public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
         {
             return _mapper.Map(source, destination);
+        }
+
+        public Booking MapBookingBindingDto<Booking>(BookingBindingDto source, int unitId)
+        {
+            return _mapper.Map<Booking>(source, opt =>
+            {
+                opt.Items[MappingItemCodes.UNIT_ID] = unitId;
+            });
         }
     }
 }

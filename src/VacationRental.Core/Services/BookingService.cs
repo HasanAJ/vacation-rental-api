@@ -60,9 +60,9 @@ namespace VacationRental.Core.Services
 
             _bookingValidator.Validate(rental, occupiedUnits);
 
-            Booking booking = _mapper.Map<Booking>(model);
+            int unitId = await _unitManager.GetFreeUnitId(rental.Id, occupiedUnits, ct);
 
-            booking.UnitId = await _unitManager.GetFreeUnitId(rental.Id, occupiedUnits, ct);
+            Booking booking = _mapper.MapBookingBindingDto<Booking>(model, unitId);
 
             await _uow.BookingRepository.Add(booking, ct);
 
