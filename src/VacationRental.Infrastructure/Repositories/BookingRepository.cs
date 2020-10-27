@@ -28,8 +28,6 @@ namespace VacationRental.Infrastructure.Repositories
 
         public async Task<List<Booking>> Get(int rentalId, DateTime startDate, int nights, int preparationTime, CancellationToken ct)
         {
-            List<Booking> allbookings = await _db.Set<Booking>().ToListAsync(ct);
-
             return await _db.Set<Booking>()
                 .Where(i => (i.Unit.RentalId == rentalId && i.Unit.IsActive == true)
                         && ((i.Start <= startDate.Date && i.Start.AddDays(i.Nights).AddDays(preparationTime) > startDate.Date)

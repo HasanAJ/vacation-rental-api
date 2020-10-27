@@ -59,18 +59,25 @@ namespace VacationRental.Core.Managers
         {
             int totalUnits = rental.AllUnits.Count;
 
-            if (totalUnits < model.Units)
+            List<Booking> bookings = new List<Booking>();
+
+            bool isLessUnitsOrMorePrep = model.Units < totalUnits || model.PreparationTimeInDays > rental.PreparationTimeInDays;
+
+            if (isLessUnitsOrMorePrep)
+            {
+                DateTime start = DateTime.UtcNow.Date;
+
+                bookings = await _uow.BookingRepository.Get(rental.Id, start, ct);
+
+                _unitValidator.Validate(model, bookings, start);
+            }
+
+            if (model.Units > totalUnits)
             {
                 await HandleMoreUnits(rental, model.Units, ct);
             }
-            else if (model.Units < totalUnits || model.PreparationTimeInDays > rental.PreparationTimeInDays)
+            else if (isLessUnitsOrMorePrep)
             {
-                DateTime start = DateTime.UtcNow;
-
-                List<Booking> bookings = await _uow.BookingRepository.Get(rental.Id, start, ct);
-
-                _unitValidator.Validate(model, bookings, start);
-
                 HandleLessUnits(rental.AllUnits.ToList(), bookings, model.Units);
             }
         }

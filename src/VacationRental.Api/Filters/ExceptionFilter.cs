@@ -32,10 +32,8 @@ namespace VacationRental.Api.Filters
             HttpStatusCode status = HttpStatusCode.InternalServerError;
             string code = ApiCodeConstants.SERVER_ERROR;
 
-            if (exception.GetType() == typeof(CustomException))
+            if (exception is CustomException customException)
             {
-                CustomException customException = (CustomException)exception;
-
                 code = customException.Code;
                 status = customException.HttpStatusCode;
             }
