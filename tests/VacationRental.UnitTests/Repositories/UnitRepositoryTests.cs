@@ -42,8 +42,8 @@ namespace VacationRental.UnitTests.Repositories
             _dbContext = new MockDbContext().GetDbContext();
             _unitRepository = new UnitRepository(_dbContext);
 
-            _dbContext.Rental.Add(rental);
-            _dbContext.Unit.AddRange(units);
+            _dbContext.Rentals.Add(rental);
+            _dbContext.Units.AddRange(units);
 
             _dbContext.SaveChanges();
         }

@@ -68,17 +68,17 @@ namespace VacationRental.UnitTests.Repositories
             _dbContext = new MockDbContext().GetDbContext();
             _bookingRepository = new BookingRepository(_dbContext);
 
-            if (!_dbContext.Rental.Any())
+            if (!_dbContext.Rentals.Any())
             {
-                _dbContext.Rental.Add(rental);
+                _dbContext.Rentals.Add(rental);
             }
-            if (!_dbContext.Unit.Any())
+            if (!_dbContext.Units.Any())
             {
-                _dbContext.Unit.AddRange(units);
+                _dbContext.Units.AddRange(units);
             }
-            if (!_dbContext.Booking.Any())
+            if (!_dbContext.Bookings.Any())
             {
-                _dbContext.Booking.AddRange(bookings);
+                _dbContext.Bookings.AddRange(bookings);
             }
 
             _dbContext.SaveChanges();

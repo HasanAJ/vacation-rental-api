@@ -9,21 +9,21 @@ namespace VacationRental.Infrastructure.Context
         {
         }
 
-        public virtual DbSet<Booking> Booking { get; set; }
-        public virtual DbSet<Rental> Rental { get; set; }
-        public virtual DbSet<Unit> Unit { get; set; }
+        public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual DbSet<Rental> Rentals { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Booking>()
-                .HasIndex(i => i.Start);
-
             modelBuilder.Entity<Unit>()
                 .HasOne(b => b.Rental)
                 .WithMany(b => b.AllUnits)
                 .HasForeignKey(p => p.RentalId);
+
+            modelBuilder.Entity<Booking>()
+                .HasIndex(i => i.Start);
 
             modelBuilder.Entity<Booking>()
                 .HasOne(b => b.Unit)
