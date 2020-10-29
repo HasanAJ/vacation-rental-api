@@ -76,7 +76,7 @@ namespace VacationRental.Core.Managers
             {
                 await HandleMoreUnits(rental, model.Units, ct);
             }
-            else if (isLessUnitsOrMorePrep)
+            else if (model.Units < totalUnits)
             {
                 HandleLessUnits(rental.AllUnits.ToList(), bookings, model.Units);
             }

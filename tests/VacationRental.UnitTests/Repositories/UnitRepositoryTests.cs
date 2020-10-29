@@ -53,15 +53,29 @@ namespace VacationRental.UnitTests.Repositories
         {
             List<Unit> actual = await _unitRepository.Get(rental.Id, new CancellationToken());
 
-            List<Unit> expected = units
-                .Where(i => i.RentalId == rental.Id)
-               .ToList();
+            List<Unit> expected = new List<Unit>()
+            {
+                new Unit()
+                {
+                    Id = 1,
+                    RentalId = 1,
+                    IsActive = true
+                },
+                new Unit()
+                {
+                    Id = 2,
+                    RentalId = 1,
+                    IsActive = true
+                }
+            };
 
             Assert.Equal(expected.Count, actual.Count);
 
             for (int i = 0; i < actual.Count; i++)
             {
                 Assert.Equal(expected[0].Id, actual[0].Id);
+                Assert.Equal(expected[0].RentalId, actual[0].Rental.Id);
+                Assert.Equal(expected[0].IsActive, actual[0].IsActive);
             }
         }
     }
