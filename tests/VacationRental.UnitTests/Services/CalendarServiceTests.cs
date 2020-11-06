@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using VacationRental.Core.Common.Constants;
-using VacationRental.Core.Exceptions;
+using VacationRental.Core.Common.Exceptions;
 using VacationRental.Core.Interfaces.Services;
 using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Models.Domain;

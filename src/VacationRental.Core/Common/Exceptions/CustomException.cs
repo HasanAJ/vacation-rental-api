@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace VacationRental.Core.Exceptions
+namespace VacationRental.Core.Common.Exceptions
 {
     public class CustomException : Exception
     {

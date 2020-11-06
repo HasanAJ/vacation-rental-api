@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using VacationRental.Core.Common.Constants;
-using VacationRental.Core.Exceptions;
+using VacationRental.Core.Common.Exceptions;
 using VacationRental.Core.Interfaces.Validators;
 using VacationRental.Core.Models.Domain;
 

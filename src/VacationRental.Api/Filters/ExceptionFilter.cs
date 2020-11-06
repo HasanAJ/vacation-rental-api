@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Net;
 using VacationRental.Core.Common.Constants;
-using VacationRental.Core.Exceptions;
+using VacationRental.Core.Common.Exceptions;
 using VacationRental.Core.Models.Dtos.Shared;
 
 namespace VacationRental.Api.Filters

@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using VacationRental.Core.Common.Constants;
-using VacationRental.Core.Exceptions;
+using VacationRental.Core.Common.Exceptions;
 using VacationRental.Core.Interfaces.Adapters;
 using VacationRental.Core.Interfaces.Managers;
 using VacationRental.Core.Interfaces.Services;
