@@ -2,7 +2,7 @@
 using VacationRental.Core.Attributes;
 using Xunit;
 
-namespace AuthService.Core.UnitTests.Attributes
+namespace VacationRental.UnitTests.Attributes
 {
     public class FutureDateAttributeTest
     {

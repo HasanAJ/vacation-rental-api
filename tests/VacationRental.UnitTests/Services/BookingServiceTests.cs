@@ -14,7 +14,6 @@ using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Interfaces.Validators;
 using VacationRental.Core.Models.Domain;
 using VacationRental.Core.Models.Dtos.Booking;
-using VacationRental.Core.Models.Dtos.Shared;
 using VacationRental.Core.Provider;
 using VacationRental.Core.Services;
 using Xunit;

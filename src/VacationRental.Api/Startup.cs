@@ -22,14 +22,17 @@ namespace VacationRental.Api
         {
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.ConfigureDocs();
+            services.AddDatabase();
 
-            services.RegisterCore();
-            services.RegisterInfrastructure();
+            services.AddDocs();
+
+            services.RegisterServices();
 
             services.AddAutoMapper(typeof(MappingProfile));
 
-            services.ConfigureControllers();
+            services.AddCustomControllers();
+
+            services.AddInvalidModelHandler();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,18 +42,9 @@ namespace VacationRental.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.DocumentTitle = "Vacation Rental API - Docs";
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vacation Rental API");
-                c.RoutePrefix = "swagger";
-            });
+            app.UseDocs();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

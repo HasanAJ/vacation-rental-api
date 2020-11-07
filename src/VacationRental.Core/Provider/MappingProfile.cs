@@ -2,7 +2,6 @@
 using VacationRental.Core.Common.Constants;
 using VacationRental.Core.Models.Domain;
 using VacationRental.Core.Models.Dtos.Booking;
-using VacationRental.Core.Models.Dtos.Calendar;
 using VacationRental.Core.Models.Dtos.Rental;
 
 namespace VacationRental.Core.Provider
