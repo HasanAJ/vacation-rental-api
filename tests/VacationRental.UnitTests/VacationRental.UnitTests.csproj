@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\VacationRental.Core\VacationRental.Core.csproj" />
-    <ProjectReference Include="..\..\src\VacationRental.Infrastructure\VacationRental.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Core\VacationRental.Core.Services\VacationRental.Core.Services.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\VacationRental.Infrastructure.Data\VacationRental.Infrastructure.Data.csproj" />
   </ItemGroup>
 </Project>

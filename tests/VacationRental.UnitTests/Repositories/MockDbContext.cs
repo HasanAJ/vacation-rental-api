@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VacationRental.Infrastructure.Context;
+using VacationRental.Infrastructure.Data.Context;
 
 namespace VacationRental.UnitTests.Repositories
 {

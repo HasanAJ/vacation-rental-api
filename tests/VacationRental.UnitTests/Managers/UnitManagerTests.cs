@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using VacationRental.Core.Dtos.Rental;
+using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.Managers;
 using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Interfaces.Validators;
-using VacationRental.Core.Managers;
-using VacationRental.Core.Models.Domain;
-using VacationRental.Core.Models.Dtos.Rental;
+using VacationRental.Core.Services.Managers;
 using Xunit;
 
 namespace VacationRental.UnitTests.Managers

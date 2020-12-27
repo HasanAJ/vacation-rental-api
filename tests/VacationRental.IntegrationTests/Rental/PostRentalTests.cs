@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using VacationRental.Core.Models.Dtos.Booking;
-using VacationRental.Core.Models.Dtos.Rental;
-using VacationRental.Core.Models.Dtos.Shared;
+using VacationRental.Core.Dtos.Booking;
+using VacationRental.Core.Dtos.Rental;
+using VacationRental.Core.Dtos.Shared;
 using Xunit;
 
 namespace VacationRental.IntegrationTests.Rental

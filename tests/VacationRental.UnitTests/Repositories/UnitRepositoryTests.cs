@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.Repositories;
-using VacationRental.Core.Models.Domain;
-using VacationRental.Infrastructure.Context;
-using VacationRental.Infrastructure.Repositories;
+using VacationRental.Infrastructure.Data.Context;
+using VacationRental.Infrastructure.Data.Repositories;
 using Xunit;
 
 namespace VacationRental.UnitTests.Repositories

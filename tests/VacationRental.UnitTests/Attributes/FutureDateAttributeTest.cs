@@ -1,5 +1,5 @@
 ﻿using System;
-using VacationRental.Core.Attributes;
+using VacationRental.Common.Attributes;
 using Xunit;
 
 namespace VacationRental.UnitTests.Attributes

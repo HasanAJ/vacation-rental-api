@@ -3,18 +3,18 @@ using Moq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using VacationRental.Core.Adapters;
-using VacationRental.Core.Common.Constants;
-using VacationRental.Core.Common.Exceptions;
+using VacationRental.Common.Constants;
+using VacationRental.Common.Exceptions;
+using VacationRental.Core.Dtos.Rental;
+using VacationRental.Core.Dtos.Shared;
+using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.Adapters;
 using VacationRental.Core.Interfaces.Managers;
 using VacationRental.Core.Interfaces.Services;
 using VacationRental.Core.Interfaces.UnitOfWork;
-using VacationRental.Core.Models.Domain;
-using VacationRental.Core.Models.Dtos.Rental;
-using VacationRental.Core.Models.Dtos.Shared;
-using VacationRental.Core.Provider;
-using VacationRental.Core.Services;
+using VacationRental.Core.Services.Adapters;
+using VacationRental.Core.Services.Mapping;
+using VacationRental.Core.Services.Services;
 using Xunit;
 
 namespace VacationRental.UnitTests.Services
@@ -39,8 +39,11 @@ namespace VacationRental.UnitTests.Services
             _uow = new Mock<IUnitOfWork>();
             _unitManager = new Mock<IUnitManager>();
 
-            MappingProfile profile = new MappingProfile();
-            MapperConfiguration configuration = new MapperConfiguration(cfg => cfg.AddProfile(profile));
+            MapperConfiguration configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new DomainToDtoMapping());
+                cfg.AddProfile(new DtoToDomainMapping());
+            });
             Mapper autoMapper = new Mapper(configuration);
             _mapper = new MappingAdapter(autoMapper);
 

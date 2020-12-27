@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using VacationRental.Core.Common.Constants;
-using VacationRental.Core.Common.Exceptions;
+using VacationRental.Common.Constants;
+using VacationRental.Common.Exceptions;
+using VacationRental.Core.Dtos.Booking;
+using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.Validators;
-using VacationRental.Core.Models.Domain;
-using VacationRental.Core.Models.Dtos.Booking;
-using VacationRental.Core.Validators;
+using VacationRental.Core.Services.Validators;
 using Xunit;
 
 namespace VacationRental.UnitTests.Validators

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VacationRental.Core.Dtos\VacationRental.Core.Dtos.csproj" />
+    <ProjectReference Include="..\VacationRental.Core.Entities\VacationRental.Core.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

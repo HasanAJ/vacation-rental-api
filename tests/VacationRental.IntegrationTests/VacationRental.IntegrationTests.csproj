@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\VacationRental.Api\VacationRental.Api.csproj" />
-    <ProjectReference Include="..\..\src\VacationRental.Core\VacationRental.Core.csproj" />
+    <ProjectReference Include="..\..\src\Api\VacationRental.Api\VacationRental.Api.csproj" />
   </ItemGroup>
 </Project>

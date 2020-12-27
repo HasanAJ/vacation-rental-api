@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using VacationRental.Core.Common.Constants;
-using VacationRental.Core.Common.Exceptions;
+using VacationRental.Common.Constants;
+using VacationRental.Common.Exceptions;
+using VacationRental.Core.Dtos.Calendar;
+using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.Services;
 using VacationRental.Core.Interfaces.UnitOfWork;
-using VacationRental.Core.Models.Domain;
-using VacationRental.Core.Models.Dtos.Calendar;
-using VacationRental.Core.Services;
+using VacationRental.Core.Services.Services;
 using Xunit;
 
 namespace VacationRental.UnitTests.Services
