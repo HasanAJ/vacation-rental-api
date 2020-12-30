@@ -11,7 +11,7 @@ using VacationRental.Core.Interfaces.Managers;
 using VacationRental.Core.Interfaces.Services;
 using VacationRental.Core.Interfaces.UnitOfWork;
 
-namespace VacationRental.Core.Services.Services
+namespace VacationRental.Core.Application.Services
 {
     public class RentalService : IRentalService
     {

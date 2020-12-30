@@ -5,7 +5,7 @@ using VacationRental.Common.Exceptions;
 using VacationRental.Core.Dtos.Booking;
 using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.Validators;
-using VacationRental.Core.Services.Validators;
+using VacationRental.Core.Application.Validators;
 using Xunit;
 
 namespace VacationRental.UnitTests.Validators

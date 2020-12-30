@@ -4,7 +4,7 @@ using VacationRental.Core.Dtos.Booking;
 using VacationRental.Core.Dtos.Rental;
 using VacationRental.Core.Entities;
 
-namespace VacationRental.Core.Services.Mapping
+namespace VacationRental.Core.Application.Mapping
 {
     public class DtoToDomainMapping : Profile
     {

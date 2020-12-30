@@ -8,7 +8,7 @@ using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.Managers;
 using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Interfaces.Validators;
-using VacationRental.Core.Services.Managers;
+using VacationRental.Core.Application.Managers;
 using Xunit;
 
 namespace VacationRental.UnitTests.Managers

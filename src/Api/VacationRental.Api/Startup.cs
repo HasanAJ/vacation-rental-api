@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VacationRental.Api.Extensions;
-using VacationRental.Core.Services.Mapping;
+using VacationRental.Core.Application.Mapping;
 
 namespace VacationRental.Api
 {

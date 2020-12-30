@@ -10,7 +10,7 @@ using VacationRental.Core.Dtos.Calendar;
 using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.Services;
 using VacationRental.Core.Interfaces.UnitOfWork;
-using VacationRental.Core.Services.Services;
+using VacationRental.Core.Application.Services;
 using Xunit;
 
 namespace VacationRental.UnitTests.Services

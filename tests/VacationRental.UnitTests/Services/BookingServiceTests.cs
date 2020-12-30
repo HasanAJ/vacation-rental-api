@@ -13,9 +13,9 @@ using VacationRental.Core.Interfaces.Managers;
 using VacationRental.Core.Interfaces.Services;
 using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Interfaces.Validators;
-using VacationRental.Core.Services.Adapters;
-using VacationRental.Core.Services.Mapping;
-using VacationRental.Core.Services.Services;
+using VacationRental.Core.Application.Adapters;
+using VacationRental.Core.Application.Mapping;
+using VacationRental.Core.Application.Services;
 using Xunit;
 
 namespace VacationRental.UnitTests.Services

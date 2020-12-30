@@ -9,7 +9,7 @@ using VacationRental.Core.Dtos.Rental;
 using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Interfaces.Validators;
-using VacationRental.Core.Services.Validators;
+using VacationRental.Core.Application.Validators;
 using Xunit;
 
 namespace VacationRental.UnitTests.Validators

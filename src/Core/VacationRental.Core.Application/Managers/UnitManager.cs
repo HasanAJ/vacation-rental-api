@@ -9,7 +9,7 @@ using VacationRental.Core.Interfaces.Managers;
 using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Interfaces.Validators;
 
-namespace VacationRental.Core.Services.Managers
+namespace VacationRental.Core.Application.Managers
 {
     public class UnitManager : IUnitManager
     {

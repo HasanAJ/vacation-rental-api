@@ -4,7 +4,7 @@ using VacationRental.Common.Exceptions;
 using VacationRental.Core.Entities;
 using VacationRental.Core.Interfaces.Validators;
 
-namespace VacationRental.Core.Services.Validators
+namespace VacationRental.Core.Application.Validators
 {
     public class BookingValidator : IBookingValidator
     {

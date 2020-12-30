@@ -13,7 +13,7 @@ using VacationRental.Core.Interfaces.Services;
 using VacationRental.Core.Interfaces.UnitOfWork;
 using VacationRental.Core.Interfaces.Validators;
 
-namespace VacationRental.Core.Services.Services
+namespace VacationRental.Core.Application.Services
 {
     public class BookingService : IBookingService
     {

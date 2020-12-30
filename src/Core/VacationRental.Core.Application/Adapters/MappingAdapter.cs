@@ -3,7 +3,7 @@ using VacationRental.Common.Constants;
 using VacationRental.Core.Dtos.Booking;
 using VacationRental.Core.Interfaces.Adapters;
 
-namespace VacationRental.Core.Services.Adapters
+namespace VacationRental.Core.Application.Adapters
 {
     public class MappingAdapter : IMappingAdapter
     {
