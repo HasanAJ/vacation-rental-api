@@ -7,18 +7,19 @@ phases:
       
   pre_build:
     commands:
+      - cd "src\Api\VacationRental.Api"
       - echo Restore started on `date`
-      - dotnet restore "src\Api\VacationRental.Api\VacationRental.Api.csproj"
+      - dotnet restore VacationRental.Api.csproj
       
   build:
     commands:
       - echo Build started on `date`
-      - dotnet build "src\Api\VacationRental.Api\VacationRental.Api.csproj"
+      - dotnet build VacationRental.Api.csproj
       
   post_build:
     commands:
       - echo Publish started on `date`
-      - dotnet publish -c Release -r linux-x64 --self-contained false "src\Api\VacationRental.Api\VacationRental.Api.csproj"
+      - dotnet publish -c Release -r linux-x64 --self-contained false VacationRental.Api.csproj
       
 artifacts:
   files:
