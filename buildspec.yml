@@ -1,0 +1,13 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo Restore started on `date`
+      - dotnet restore "src\Api\VacationRental.Api\VacationRental.Api.csproj"
+  build:
+    commands:
+      - echo Build started on `date`
+      - dotnet publish -c release -o ./build_output VacationRental.Api.csproj
+artifacts:
+  files:
+    - CodeBuild-VacationRental.Api/build_output/**/*
