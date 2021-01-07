@@ -7,22 +7,22 @@ phases:
       
   pre_build:
     commands:
-      - cd "src\Api\VacationRental.Api"
+      - echo ASPNETCORE_ENVIRONMENT is $ASPNETCORE_ENVIRONMENT
       - echo Restore started on `date`
-      - dotnet restore VacationRental.Api.csproj
+      - dotnet restore "src\Api\VacationRental.Api\VacationRental.Api.csproj"
       
   build:
     commands:
       - echo Build started on `date`
-      - dotnet build VacationRental.Api.csproj
+      - dotnet build "src\Api\VacationRental.Api\VacationRental.Api.csproj"
       
   post_build:
     commands:
       - echo Publish started on `date`
-      - dotnet publish -c Release -r linux-x64 --self-contained false VacationRental.Api.csproj
+      - dotnet publish -c Release -r linux-x64 --self-contained false "src\Api\VacationRental.Api\VacationRental.Api.csproj"
       
 artifacts:
   files:
     - '**/*'
-  base-directory: ./bin/Release/netcoreapp3.1/linux-x64/publish/
+  base-directory: .src/Api/VacationRental.Api/bin/Release/netcoreapp3.1/linux-x64/publish/
   discard-paths: no
